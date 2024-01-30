@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { HiOutlineExclamationCircle } from "react-icons/hi";
+import { set } from "mongoose";
 
 export default function DashPosts() {
   const { currentUser } = useSelector((state) => state.user);
@@ -63,12 +64,12 @@ export default function DashPosts() {
       if (!res.ok) {
         console.log(data.message);
       } else {
-        setUserPosts((prev) => {
-          prev.filter((post) => post._id !== postIdToDelete);
-        });
+        setUserPosts((prev) =>
+          prev.filter((post) => post._id !== postIdToDelete)
+        );
       }
     } catch (error) {
-      console.log(error);
+      console.log(error.message);
     }
   };
   return (

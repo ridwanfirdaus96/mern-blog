@@ -87,7 +87,7 @@ export default function UpdatePost() {
     e.preventDefault();
     try {
       const res = await fetch(
-        `api/post/updatepost/${formData._id}/${currentUser._id}`,
+        `/api/post/updatepost/${formData._id}/${currentUser._id}`,
         {
           method: "PUT",
           headers: {
@@ -126,13 +126,13 @@ export default function UpdatePost() {
                 title: e.target.value,
               })
             }
-            value={formData.title}
+            value={formData.title || ""}
           />
           <Select
             onChange={(e) =>
               setFormData({ ...formData, category: e.target.value })
             }
-            value={formData.category}
+            value={formData.category || ""}
           >
             <option value="uncategorized">Select a category</option>
             <option value="javascript">JavaScript</option>
@@ -157,7 +157,7 @@ export default function UpdatePost() {
             {imageUploadProgress ? (
               <div className="w-16 h-16">
                 <CircularProgressbar
-                  value={imageUploadProgress}
+                  value={imageUploadProgress || ""}
                   text={`${imageUploadProgress || 0}%`}
                 />
               </div>
@@ -176,7 +176,7 @@ export default function UpdatePost() {
         )}
         <ReactQuill
           theme="snow"
-          value={formData.content}
+          value={formData.content || ""}
           placeholder="Write something.."
           className="h-72 mb-12"
           required
